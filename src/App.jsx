@@ -1,22 +1,28 @@
-import './App.css';
-import Header from './components/header';
-import Body from './components/body';
-import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
-
+import React from "react";
+import Header from "./components/Header";
+import TinderCards from "./components/TinderCards";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SwipeButtons from "./components/SwipeButtons";
+import Chats from "./components/Chats";
+import ChatScreen from "./components/ChatScreen";
+import Chat from "@mui/icons-material/Chat";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      
       <Router>
+        
         <Routes>
-          <Route path='/'>
+        
+          <Route path="/chat/:person" Component={ChatScreen}/>
+            
+          <Route path="/chat" Component={Chats}/>
 
-          </Route>
-        </Routes>
+          <Route path="/" Component={TinderCards}/>
           
-
-        <Body/>
+        </Routes>
       </Router>
     </div>
   );

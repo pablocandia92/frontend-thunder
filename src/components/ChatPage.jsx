@@ -1,6 +1,6 @@
 import React from "react";
 
-class Body extends React.Component {
+class ChatPage extends React.Component {
     constructor(props){
         super(props)
     }
@@ -8,10 +8,10 @@ class Body extends React.Component {
     render() {
         return(
             <body>
-                
+               Este es el ChatPage  
             </body>
         )
     }
 }
 
-export default Body;
+export default ChatPage;
