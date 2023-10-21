@@ -7,12 +7,14 @@ import { wait } from "@testing-library/user-event/dist/utils";
 
 function TinderCards() {
   const [people, setPeople] = useState([
+    { name: "Paylord Swift", 
+      url : "https://imagenes.elpais.com/resizer/JRf0j6Vdr_klRRV4E5Ze3a41HKs=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SC366MQEQNDVRHXSDEQMKHM5DA.jpg"
+    },
     { name: "Taylor Swift", 
       url : "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2023/05/10/2947481.jpg"
     },
-    { name: "Paylord Swift", 
-      url : "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2023/05/10/2947481.jpg"
-    }
+
+
 
   ]);
 
