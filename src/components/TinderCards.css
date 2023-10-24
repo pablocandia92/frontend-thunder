@@ -25,9 +25,10 @@
 }
 
 .distancia{
+    position: absolute;
     margin-top: 400px;
     margin-left: 500px;
-    bottom: 10px;
+    bottom: 35px;
     color: white;
     font-size: 20px;
 }
@@ -42,3 +43,4 @@
 .swipe {
     position: absolute;
 }
+

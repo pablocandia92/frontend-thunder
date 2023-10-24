@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import "./ChatScreen.css";
 
-const ChatScreen = () => {
+const ChatScreen = (props) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
     {
-      name: "Ariana Grande",
-      image:
-        "https://media.vogue.mx/photos/5e9f0aef8966aa000859aac6/1:1/w_2264,h_2264,c_limit/como-hacer-el-peinado-de-ariana-grande.jpg",
-      message: "Que lindo que sos jaja",
+      name: props.name,
+      image: props.profilePic,
+      message: props.message,
     }
   ])
 
@@ -21,7 +19,7 @@ const ChatScreen = () => {
   return (
     <div className="chatScreen">
       <p className="chatScreen__timestamp">
-        YOU MATCHED WITH ARIANA GRANDE YESTERDAY
+        {`YOU MATCHED WITH ${props.name.toUpperCase()}`}
       </p>
       {messages.map((message) =>
         message.name ? (
