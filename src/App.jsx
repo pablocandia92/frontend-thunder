@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import TinderCards from "./components/TinderCards";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import SwipeButtons from "./components/SwipeButtons";
 import Chats from "./components/Chats";
 import ChatScreen from "./components/ChatScreen";
@@ -11,19 +11,17 @@ import Chat from "@mui/icons-material/Chat";
 function App() {
   return (
     <div className="App">
-      
-      <Router>
-        
+        <Header/>
         <Routes>
         
-          <Route path="/chat/:person" Component={ChatScreen}/>
+          <Route path="/chat/:person" element={<ChatScreen/>}/>
             
-          <Route path="/chat" Component={Chats}/>
+          <Route path="/chat" element={<Chats/>}/>
 
-          <Route path="/" Component={TinderCards}/>
+          <Route path="/" element={<TinderCards/>}/>
           
         </Routes>
-      </Router>
+
     </div>
   );
 }
