@@ -2,12 +2,12 @@ import React from "react";
 import ChatPreview from "./ChatPreview";
 import './ChatsPreviewList.css'
 import ChatScreen from "./ChatScreen";
+import { v4 as uuidv4 } from 'uuid';
 
 class ChatsList extends React.Component{
     constructor(props) {
         super(props)
-
-        //state lista de mensajes
+﻿
         this.state = {
             messages : [
                 {
@@ -53,20 +53,12 @@ class ChatsList extends React.Component{
     
                 }
               ],
-            actualChat : null
         }
     }
 
     //component didmount api mensajes
     changeChat(name, profilePic, message) {
-      this.clearChat()
       this.openChat(name, profilePic, message)
-    }
-
-    clearChat() {
-      this.setState({
-        actualChat : null
-      })
     }
 
     openChat(name, profilePic, message) {
@@ -85,10 +77,10 @@ class ChatsList extends React.Component{
               <div className="container-chatslist__previews">
                 {this.state.messages.map((e) => (
                   <div className="chat"
-                  key={e.name}
+                  key={uuidv4()}
                   onClick={() => this.changeChat(e.name, e.profilePic, e.message)}>
                     <ChatPreview
-                      key={e.name}
+                      key={uuidv4()}
                       name={e.name}
                       message={e.message}
                       timestamp={e.timestamp}
@@ -100,7 +92,7 @@ class ChatsList extends React.Component{
               <div className="container-chatslist__chat-screen">
                 {this.state.selectedChat && (
                   <ChatScreen
-                    key={this.state.selectedChat.name}
+                    key={uuidv4()}
                     name={this.state.selectedChat.name}
                     profilePic={this.state.selectedChat.profilePic}
                     message={this.state.selectedChat.message}
@@ -113,6 +105,3 @@ class ChatsList extends React.Component{
 }
 
 export default ChatsList
-
-
-//MIGRAR CHATSPREVIEWLIST A CHATPAGE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
