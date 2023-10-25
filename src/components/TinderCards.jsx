@@ -4,7 +4,7 @@ import "./TinderCards.css"
 import SwipeButtons from "./SwipeButtons";
 
 const db = [
-  { name: "Paylord Swift", 
+  { name: "Ofelia Fernandez", 
       url : "https://imagenes.elpais.com/resizer/JRf0j6Vdr_klRRV4E5Ze3a41HKs=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SC366MQEQNDVRHXSDEQMKHM5DA.jpg",
       age: "25",
       distancia: "2 km"

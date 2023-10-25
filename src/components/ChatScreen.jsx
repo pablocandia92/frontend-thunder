@@ -21,9 +21,10 @@ const ChatScreen = (props) => {
       <p className="chatScreen__timestamp">
         {`YOU MATCHED WITH ${props.name.toUpperCase()}`}
       </p>
-      {messages.map((message) =>
+      {messages.map((message, index) =>
+        
         message.name ? (
-          <div className="chatScreen__message">
+          <div key = {'index' + index}  className="chatScreen__message">
             <Avatar
               className="chatScreen__image"
               alt={message.name}
