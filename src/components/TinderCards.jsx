@@ -74,7 +74,7 @@ function Advanced () {
 
   return (
     <div className='Container'>
-      <h1>React Tinder Card</h1>
+     
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard
