@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
-import TinderCards from "./components/TinderCards";
+import Advanced from "./components/TinderCards";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import SwipeButtons from "./components/SwipeButtons";
@@ -14,7 +14,7 @@ function App() {
             
           <Route path="/chat" element={<ChatsList/>}/>
 
-          <Route path="/" element={<TinderCards/>}/>
+          <Route path="/" element={<Advanced/>}/>
           
         </Routes>
 

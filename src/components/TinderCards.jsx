@@ -67,14 +67,6 @@ function Advanced () {
 
   return (
     <div className='Container'>
-      <link
-        href='https://fonts.googleapis.com/css?family=Damion&display=swap'
-        rel='stylesheet'
-      />
-      <link
-        href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
-        rel='stylesheet'
-      />
       <h1>React Tinder Card</h1>
       <div className='cardContainer'>
         {db.map((character, index) => (
@@ -90,6 +82,8 @@ function Advanced () {
               className='card'
             >
               <h3>{character.name}</h3>
+              <h3 className="edad">{character.age}</h3>
+              <h3 className="distancia">{character.distancia}</h3>
             </div>
           </TinderCard>
         ))}
