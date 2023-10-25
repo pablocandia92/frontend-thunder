@@ -9,26 +9,23 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import IconButton from '@mui/material/IconButton';
 
-const SwipeButtons = () => {
-  const handleReplayClick = () => {
-    // Realiza la acción deseada cuando se hace clic en el botón "Replay".
-    // Esto podría ser deshacer una acción anterior o realizar alguna otra tarea.
-    console.log("Botón Replay clicado");
-    // Realiza aquí la acción que necesitas
-  };
 
+
+const SwipeButtons = (props) => {
+  
+  //console.log(props.handleReplay)
   return (
     <div className="swipeButtons">
-      <IconButton  onClick={handleReplayClick} className="swipeButtons__repeat">
+      <IconButton  onClick={props.handleReplay} className="swipeButtons__repeat">
         <ReplayIcon fontSize="large" />
       </IconButton>
-      <IconButton className="swipeButtons__left">
+      <IconButton onClick={props.handleLeft} className="swipeButtons__left">
         <CloseIcon fontSize="large" />
       </IconButton>
-      <IconButton className="swipeButtons__star">
+      <IconButton onClick={props.handleSuper} className="swipeButtons__star">
         <StarRateIcon fontSize="large" />
       </IconButton>
-      <IconButton className="swipeButtons__right">
+      <IconButton onClick={props.handleRight} className="swipeButtons__right">
         <FavoriteIcon fontSize="large" />
       </IconButton>
       <IconButton className="swipeButtons__lightning">

@@ -51,6 +51,9 @@ h1 {
     position: absolute;
 }
 
+.swipe.hidden {
+    display: none;
+  }
 .infoText {
     margin-top: 20px;
 }

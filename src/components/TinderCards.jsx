@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react'
 import TinderCard from 'react-tinder-card'
 import "./TinderCards.css"
+import SwipeButtons from "./SwipeButtons";
 
 const db = [
   { name: "Paylord Swift", 
@@ -22,12 +23,14 @@ function Advanced () {
   const currentIndexRef = useRef(currentIndex)
 
   const childRefs = useMemo(
-    () =>
-      Array(db.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  )
+    () => {
+    const refs = [];
+    for (let i = 0; i < db.length; i++) {
+      refs.push(React.createRef());
+    }
+    return refs;
+  }, [db.length]);
+
 
   const updateCurrentIndex = (val) => {
     setCurrentIndex(val)
@@ -41,13 +44,17 @@ function Advanced () {
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
     setLastDirection(direction)
-    updateCurrentIndex(index - 1)
+    console.log(`${nameToDelete} (${index})`)
+    
+    setTimeout(() => {
+      updateCurrentIndex(index - 1);
+    }, 550); // 1000 milliseconds = 1 second
   }
 
   const outOfFrame = (name, idx) => {
-    console.log(`${name} expected. (${idx})left the screen!, ${currentIndexRef.current}`)
-
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
+    console.log(`${name} expected. (${idx})left the screen!, ${currentIndex}`)
+    console.log(childRefs.length)
+    //currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
 
   }
 
@@ -72,7 +79,8 @@ function Advanced () {
         {db.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
-            className='swipe'
+            swipeRequirementType='position'
+            className={`swipe ${currentIndexRef.current < index ? 'hidden' : ''}`}
             key={character.name}
             onSwipe={(dir) => swiped(dir, character.name, index)}
             onCardLeftScreen={() => outOfFrame(character.name, index)}
@@ -88,20 +96,14 @@ function Advanced () {
           </TinderCard>
         ))}
       </div>
-      <div className='buttons'>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-        <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
-      </div>
-      {lastDirection ? (
-        <h2 key={lastDirection} className='infoText'>
-          You swiped {lastDirection}
-        </h2>
-      ) : (
-        <h2 className='infoText'>
-          Swipe a card or press a button to get Restore Card button visible!
-        </h2>
-      )}
+      
+      {<SwipeButtons 
+      handleReplay={() => goBack()}
+      handleRight={() => swipe('right')}
+      handleLeft={() => swipe('left')}
+      handleSuper={() => swipe('up')}
+      />}
+      
     </div>
   )
 }
