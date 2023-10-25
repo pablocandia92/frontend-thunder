@@ -33,7 +33,7 @@
     font-size: 20px;
 }
 
-.tinderCards__cardContainer {
+.cardContainer {
     display: flex;
     justify-content: center;
     margin-top: 5vh;
@@ -42,5 +42,15 @@
 /* stacks cards on top of each other */
 .swipe {
     position: absolute;
+}
+
+.buttons {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+}
+
+.Container {
+    position: relative;
 }
 

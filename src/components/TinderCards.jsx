@@ -1,60 +1,115 @@
-import React, { useState, useEffect } from "react";
-import TinderCard from "react-tinder-card";
-import "./TinderCards.css";
-import SwipeButtons from "./SwipeButtons";
-import Header from "./Header";
-import { wait } from "@testing-library/user-event/dist/utils";
+import React, { useState, useMemo, useRef } from 'react'
+import TinderCard from 'react-tinder-card'
+import "./TinderCards.css"
 
-function TinderCards() {
-  const [people, setPeople] = useState([
-    { name: "Warlock", 
+const db = [
+  { name: "Paylord Swift", 
       url : "https://imagenes.elpais.com/resizer/JRf0j6Vdr_klRRV4E5Ze3a41HKs=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/SC366MQEQNDVRHXSDEQMKHM5DA.jpg",
       age: "25",
-      distancia: "2 km",
+      distancia: "2 km"
     },
     { name: "Taylor Swift", 
       url : "https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2023/05/10/2947481.jpg",
       age: "19",
-      distancia: "1 km",
+      distancia: "1 km"
     },
+]
 
+function Advanced () {
+  const [currentIndex, setCurrentIndex] = useState(db.length - 1)
+  const [lastDirection, setLastDirection] = useState()
+  // used for outOfFrame closure
+  const currentIndexRef = useRef(currentIndex)
 
+  const childRefs = useMemo(
+    () =>
+      Array(db.length)
+        .fill(0)
+        .map((i) => React.createRef()),
+    []
+  )
 
-  ]);
+  const updateCurrentIndex = (val) => {
+    setCurrentIndex(val)
+    currentIndexRef.current = val
+  }
 
+  const canGoBack = currentIndex < db.length - 1
 
-  const onSwipe = (index) => {
-    setPeople((prevPeople) => prevPeople.filter((person, i) => i !== index))
+  const canSwipe = currentIndex >= 0
 
+  // set last direction and decrease current index
+  const swiped = (direction, nameToDelete, index) => {
+    setLastDirection(direction)
+    updateCurrentIndex(index - 1)
+  }
+
+  const outOfFrame = (name, idx) => {
+    console.log(`${name} expected. (${idx})left the screen!, ${currentIndexRef.current}`)
+
+    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
+
+  }
+
+  const swipe = async (dir) => {
+    if (canSwipe && currentIndex < db.length) {
+      await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
     }
+  }
 
+  // increase current index and show card
+  const goBack = async () => {
+    if (!canGoBack) return
+    const newIndex = currentIndex + 1
+    updateCurrentIndex(newIndex)
+    await childRefs[newIndex].current.restoreCard()
+  }
 
   return (
-    <div>
-      <div className="tinderCards__cardContainer">
-        {people.map((person) => (
-          <TinderCard onSwipe={() => onSwipe(people.indexOf(person))}
-            className="swipe"
-            key={person.name}
-            preventSwipe={["up", "down"]}
-            swipeRequirementType="position"
-            swipeThreshold={280}
+    <div className='Container'>
+      <link
+        href='https://fonts.googleapis.com/css?family=Damion&display=swap'
+        rel='stylesheet'
+      />
+      <link
+        href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
+        rel='stylesheet'
+      />
+      <h1>React Tinder Card</h1>
+      <div className='cardContainer'>
+        {db.map((character, index) => (
+          <TinderCard
+            ref={childRefs[index]}
+            className='swipe'
+            key={character.name}
+            onSwipe={(dir) => swiped(dir, character.name, index)}
+            onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
-              style={{ backgroundImage: `url(${person.url})` }}
-              className="card"
+              style={{ backgroundImage: 'url(' + character.url + ')' }}
+              className='card'
             >
-              <h3>{person.name}</h3>
-              <h3 className="edad">{person.age}</h3>
-              <h3 className="distancia">{person.distancia}</h3>
+              <h3>{character.name}</h3>
             </div>
           </TinderCard>
         ))}
       </div>
-      <SwipeButtons />
+      <div className='buttons'>
+        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
+        <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
+        <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
+      </div>
+      {lastDirection ? (
+        <h2 key={lastDirection} className='infoText'>
+          You swiped {lastDirection}
+        </h2>
+      ) : (
+        <h2 className='infoText'>
+          Swipe a card or press a button to get Restore Card button visible!
+        </h2>
+      )}
     </div>
-    
-  );
+  )
+}
 
-  }
-export default TinderCards;
+export default Advanced
