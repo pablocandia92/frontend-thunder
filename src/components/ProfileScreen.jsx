@@ -1,0 +1,10 @@
+// HAY QUE CREAR LA PANTALLA DE PERFIL DEL USUARIO PARA ASIGNARLA AL BOTON CORRESPONDIENTE.
+
+<body>
+
+    <h1>PROFILE GARCHADO</h1>
+
+</body>
+
+
+export default profileScreen

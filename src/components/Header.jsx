@@ -20,7 +20,7 @@ function Header(){
                     href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
                     rel='stylesheet'
                 />
-                <IconButton onClick={() => navigate("/chat")}><PersonIcon/></IconButton>
+                <IconButton onClick={() => navigate("/profile")}><PersonIcon/></IconButton>
                 <IconButton onClick={() => navigate("/")}><BoltIcon/></IconButton>
                 <IconButton onClick={() => navigate("/chat")}><ChatIcon/></IconButton>
             </header>

@@ -15,6 +15,8 @@ function App() {
           <Route path="/chat" element={<ChatsList/>}/>
 
           <Route path="/" element={<Advanced/>}/>
+
+          <Route path="/profile" element ={<profileScreen/>}/>
           
         </Routes>
 
